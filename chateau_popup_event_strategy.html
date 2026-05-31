@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Château Living — Pop-Up Event Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --stone: #F2EDE5;
+  --stone-dark: #E4DDD3;
+  --parchment: #FAF7F2;
+  --gold: #B8965A;
+  --gold-light: #D4B483;
+  --gold-pale: #F0E6D2;
+  --ink: #1C1A17;
+  --ink-mid: #4A453D;
+  --ink-light: #8A8278;
+  --forest: #3D5044;
+  --forest-light: #EBF0EB;
+  --cream: #FDFAF5;
+  --border: #D9D1C4;
+  --white: #FFFFFF;
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--parchment);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ── PRINT ── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; font-size: 12px; }
+  .hero { min-height: auto; padding: 60px 40px; }
+  .hero-badge { display: none; }
+  section { break-inside: avoid; }
+  .event-tier { break-inside: avoid; }
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,150,90,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 100%, rgba(61,80,68,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 80%, rgba(184,150,90,0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.hero-ornament {
+  font-family: 'Cormorant', serif;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+  position: relative;
+}
+.hero-ornament::before,
+.hero-ornament::after {
+  content: '——';
+  margin: 0 12px;
+  opacity: 0.5;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  position: relative;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(250,247,242,0.65);
+  margin-bottom: 48px;
+  letter-spacing: 0.05em;
+}
+
+.hero-divider {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  margin: 0 auto 48px;
+}
+
+.hero-intro {
+  max-width: 560px;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.75);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+
+.hero-badge {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 90px;
+  height: 90px;
+  border: 1px solid rgba(184,150,90,0.4);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.hero-badge span:first-child {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.hero-badge span:last-child {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(212,180,131,0.7);
+}
+
+/* ── WRAPPER ── */
+.wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ── SECTION HEADER ── */
+.sec-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.sec-title em { font-style: italic; color: var(--gold); }
+.sec-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 24px;
+}
+.sec-body {
+  font-weight: 300;
+  color: var(--ink-mid);
+  max-width: 640px;
+  line-height: 1.85;
+}
+
+/* ── CONCEPT SECTION ── */
+.concept {
+  padding: 100px 0;
+  background: var(--parchment);
+}
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+  margin-top: 48px;
+}
+.concept-block {
+  padding: 36px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  position: relative;
+}
+.concept-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-light));
+}
+.concept-block h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.concept-block p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.8;
+}
+
+/* ── EVENT TIERS ── */
+.tiers {
+  padding: 100px 0;
+  background: var(--ink);
+}
+.tiers .sec-label { color: var(--gold-light); }
+.tiers .sec-title { color: var(--cream); }
+.tiers .sec-rule { background: var(--gold-light); }
+.tiers .sec-body { color: rgba(250,247,242,0.65); }
+
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.event-tier {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(184,150,90,0.2);
+  border-radius: 2px;
+  padding: 36px 28px;
+  position: relative;
+  transition: border-color 0.3s;
+}
+.event-tier:hover { border-color: rgba(184,150,90,0.5); }
+.event-tier.featured {
+  background: rgba(184,150,90,0.08);
+  border-color: rgba(184,150,90,0.4);
+}
+.tier-tag {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.tier-tag.premium { color: var(--gold-light); }
+.tier-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+.tier-subtitle {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba(212,180,131,0.6);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.tier-price {
+  font-family: 'Cormorant', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--gold-light);
+  margin-bottom: 4px;
+}
+.tier-price span {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(212,180,131,0.6);
+}
+.tier-time {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(250,247,242,0.4);
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+.tier-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(184,150,90,0.15);
+  margin-bottom: 24px;
+}
+.tier-includes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tier-includes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.75);
+  line-height: 1.5;
+}
+.tier-includes li::before {
+  content: '◆';
+  font-size: 6px;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+.tier-note {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(184,150,90,0.1);
+  font-size: 11px;
+  font-style: italic;
+  color: rgba(212,180,131,0.5);
+  font-family: 'Cormorant', serif;
+}
+
+/* ── ROOMS ── */
+.rooms {
+  padding: 100px 0;
+  background: var(--stone);
+}
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 56px;
+}
+.room-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.room-visual {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  position: relative;
+  overflow: hidden;
+}
+.room-visual.salon { background: linear-gradient(135deg, #E8E0D4 0%, #D4C9B8 100%); }
+.room-visual.chamber { background: linear-gradient(135deg, #D4DCDA 0%, #C0CECA 100%); }
+.room-visual.library { background: linear-gradient(135deg, #DDD6C8 0%, #C8BDA8 100%); }
+.room-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.08));
+}
+.room-body { padding: 24px; }
+.room-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.room-tagline {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.room-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+.room-lessons {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.room-lessons li {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-mid);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.5;
+}
+.room-lessons li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 10px;
+}
+
+/* ── GOODIE BAG ── */
+.goodies {
+  padding: 100px 0;
+  background: var(--parchment);
+}
+.goodie-intro {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 56px;
+}
+.goodie-tag {
+  background: var(--ink);
+  padding: 40px 32px;
+  border-radius: 2px;
+  text-align: center;
+}
+.goodie-tag-label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.goodie-tag-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.goodie-tag-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.5);
+  line-height: 1.7;
+}
+.goodie-list-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+.goodie-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.goodie-item {
+  padding: 20px 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.goodie-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.goodie-item-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.goodie-item-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ink-light);
+  line-height: 1.5;
+}
+
+/* ── LINENS ── */
+.linens {
+  padding: 100px 0;
+  background: var(--forest);
+}
+.linens .sec-label { color: rgba(212,180,131,0.8); }
+.linens .sec-title { color: var(--cream); }
+.linens .sec-rule { background: var(--gold-light); }
+.linens .sec-body { color: rgba(250,247,242,0.65); max-width: 520px; }
+
+.linens-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 56px;
+}
+.linen-card {
+  border: 1px solid rgba(212,180,131,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.linen-swatch {
+  height: 120px;
+  position: relative;
+}
+.linen-swatch.ivory { background: linear-gradient(135deg, #F5F0E8, #EDE5D8); }
+.linen-swatch.champagne { background: linear-gradient(135deg, #E8D9BC, #D4C4A4); }
+.linen-swatch.moonstone { background: linear-gradient(135deg, #D8DDE0, #C4CDD2); }
+.linen-swatch.dusky { background: linear-gradient(135deg, #C8C0D0, #B4A8BC); }
+.linen-swatch::after {
+  content: 'Touch me';
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(28,26,23,0.4);
+  font-family: 'Jost', sans-serif;
+}
+.linen-body {
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.04);
+}
+.linen-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+.linen-thread {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+.linen-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.55);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.linen-price {
+  font-family: 'Cormorant', serif;
+  font-size: 20px;
+  color: var(--gold-light);
+}
+.linen-cta {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184,150,90,0.3);
+  padding-bottom: 2px;
+}
+
+/* ── FURNITURE STYLING ── */
+.styling {
+  padding: 100px 0;
+  background: var(--stone-dark);
+}
+.styling-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 56px;
+}
+.styling-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  background: var(--white);
+  margin-bottom: 16px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.styling-num {
+  background: var(--ink);
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.styling-num-val {
+  font-family: 'Cormorant', serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: rgba(184,150,90,0.3);
+  line-height: 1;
+}
+.styling-num-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.4);
+}
+.styling-content {
+  padding: 32px 36px;
+}
+.styling-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.styling-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+.styling-tips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tip-pill {
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--gold-pale);
+  color: var(--ink-mid);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(184,150,90,0.2);
+}
+
+/* ── PILLOWS ── */
+.pillows {
+  padding: 100px 0;
+  background: var(--parchment);
+}
+.pillow-formula {
+  margin-top: 56px;
+  padding: 48px;
+  background: var(--ink);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.pillow-formula::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,150,90,0.12), transparent 70%);
+}
+.pillow-formula-label {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.pillow-formula-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 32px;
+}
+.pillow-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(184,150,90,0.15);
+  margin-bottom: 40px;
+}
+.pillow-step {
+  background: rgba(255,255,255,0.02);
+  padding: 28px 24px;
+  text-align: center;
+}
+.pillow-step-num {
+  font-family: 'Cormorant', serif;
+  font-size: 40px;
+  font-weight: 300;
+  color: rgba(184,150,90,0.4);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.pillow-step-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+.pillow-step-desc {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.5);
+  line-height: 1.6;
+}
+.pillow-extras {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.pillow-extra {
+  padding: 20px 24px;
+  border: 1px solid rgba(184,150,90,0.2);
+  border-radius: 2px;
+}
+.pillow-extra-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+.pillow-extra-body {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.6);
+  line-height: 1.7;
+}
+
+/* ── LOGISTICS ── */
+.logistics {
+  padding: 100px 0;
+  background: var(--stone);
+}
+.logistics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 56px;
+}
+.logistics-card {
+  padding: 32px 28px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+.logistics-icon { font-size: 28px; margin-bottom: 14px; }
+.logistics-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.logistics-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.logistics-list li {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--ink-mid);
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+.logistics-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  font-size: 5px;
+  color: var(--gold);
+  top: 7px;
+}
+
+/* ── REVENUE ── */
+.revenue {
+  padding: 100px 0;
+  background: var(--ink);
+}
+.revenue .sec-label { color: var(--gold-light); }
+.revenue .sec-title { color: var(--cream); }
+.revenue .sec-rule { background: var(--gold-light); }
+.revenue .sec-body { color: rgba(250,247,242,0.6); }
+
+.revenue-table {
+  margin-top: 56px;
+  border: 1px solid rgba(184,150,90,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.rev-row {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  gap: 0;
+}
+.rev-row.header {
+  background: rgba(184,150,90,0.1);
+  border-bottom: 1px solid rgba(184,150,90,0.2);
+}
+.rev-cell {
+  padding: 16px 24px;
+  font-size: 13px;
+  color: rgba(250,247,242,0.7);
+  border-right: 1px solid rgba(184,150,90,0.1);
+  font-weight: 300;
+}
+.rev-cell:last-child { border-right: none; }
+.rev-row.header .rev-cell {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.rev-row:not(.header) { border-bottom: 1px solid rgba(184,150,90,0.08); }
+.rev-row:last-child { border-bottom: none; }
+.rev-row.total { background: rgba(184,150,90,0.06); }
+.rev-row.total .rev-cell {
+  font-weight: 500;
+  color: var(--cream);
+  font-size: 14px;
+}
+.rev-row.total .rev-cell:last-child {
+  font-family: 'Cormorant', serif;
+  font-size: 22px;
+  color: var(--gold-light);
+}
+.rev-note {
+  margin-top: 20px;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.35);
+  font-style: italic;
+}
+
+/* ── CTA ── */
+.cta-section {
+  padding: 100px 0;
+  background: var(--stone);
+  text-align: center;
+}
+.cta-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.cta-ornament {
+  font-family: 'Cormorant', serif;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+.cta-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.85;
+  margin-bottom: 40px;
+}
+.btn-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 16px 36px;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--forest); border-color: var(--forest); }
+.btn-secondary {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 16px 36px;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: border-color 0.2s;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 48px 32px;
+  text-align: center;
+}
+footer p {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: rgba(250,247,242,0.3);
+}
+footer .footer-gold {
+  font-family: 'Cormorant', serif;
+  font-size: 22px;
+  font-style: italic;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .concept-grid, .tier-grid, .linens-grid, .pillow-steps, .logistics-grid { grid-template-columns: 1fr; }
+  .rooms-grid { grid-template-columns: 1fr; }
+  .goodie-intro { grid-template-columns: 1fr; gap: 32px; }
+  .goodie-items { grid-template-columns: 1fr; }
+  .pillow-extras { grid-template-columns: 1fr; }
+  .styling-item { grid-template-columns: 1fr; }
+  .rev-row { grid-template-columns: 1fr 1fr; }
+  .hero-badge { display: none; }
+  .wrap { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-badge no-print">
+    <span>2025</span>
+    <span>Strategy</span>
+  </div>
+  <div class="hero-ornament">Château Living</div>
+  <h1>The Art of<br/><em>Château</em><br/>Living</h1>
+  <div class="hero-sub">A luxury pop-up experience</div>
+  <div class="hero-divider"></div>
+  <p class="hero-intro">An immersive one-day event strategy for châteaux currently on the market — where prospective buyers, design lovers, and property enthusiasts experience the full art of château living through styling, textiles, and curated education.</p>
+</section>
+
+<!-- ── CONCEPT ── -->
+<section class="concept">
+  <div class="wrap">
+    <div class="sec-label">The concept</div>
+    <h2 class="sec-title">More than a property tour.<br/><em>A way of life.</em></h2>
+    <div class="sec-rule"></div>
+    <p class="sec-body">This is a Steve Cordony-style masterclass model applied to the high-end château property market. Instead of open inspections, we create intimate, ticketed events inside châteaux for sale — giving guests an emotional and sensory connection to the property that no listing photography ever could.</p>
+    <div class="concept-grid">
+      <div class="concept-block">
+        <h3>The Opportunity</h3>
+        <p>Women over 50 are the fastest-growing luxury travel and lifestyle segment globally. They are property buyers, dreamers, and experience seekers — this event speaks directly to all three impulses at once. A château for sale becomes a stage; guests become participants in a lifestyle they can imagine owning.</p>
+      </div>
+      <div class="concept-block">
+        <h3>The Model</h3>
+        <p>Tiered ticketed events held inside the château over one or two days. Guests pay to attend, leave with luxury gift bags and memories, and naturally become warm leads for the property. Revenue is generated from ticket sales, product purchases on the day, and brand partnerships — the event pays for itself.</p>
+      </div>
+      <div class="concept-block">
+        <h3>The Feeling</h3>
+        <p>Think: champagne on arrival in a stone courtyard. Rooms styled to their highest potential. Expert guidance on how the spaces could live and breathe as a home. The scent of fresh flowers, the weight of beautiful linen in your hands, lunch served at a long dining table as though you already own this place.</p>
+      </div>
+      <div class="concept-block">
+        <h3>Why It Works</h3>
+        <p>People buy property emotionally first, rationally second. An open house triggers logic. An experience like this triggers belonging. Every touchpoint — the curated gift bag, the styling lesson, the feel of the sheets — says: <em>this is the life you deserve.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENT TIERS ── -->
+<section class="tiers">
+  <div class="wrap">
+    <div class="sec-label">Event structure</div>
+    <h2 class="sec-title" style="color:var(--cream);">Three <em style="color:var(--gold-light);">tiers,</em><br/>one château.</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-body">Model each event day with three tiers, each at a different price point and time of day — maximising attendance and revenue while creating urgency through scarcity.</p>
+    <div class="tier-grid">
+
+      <div class="event-tier">
+        <div class="tier-tag">Tier One</div>
+        <div class="tier-name">The Morning Welcome</div>
+        <div class="tier-subtitle">Champagne & discovery</div>
+        <div class="tier-price">€195 <span>per person</span></div>
+        <div class="tier-time">9:30 — 12:30 · Capacity: 20</div>
+        <div class="tier-divider"></div>
+        <ul class="tier-includes">
+          <li>Welcome champagne & seasonal canapés in the courtyard</li>
+          <li>Guided room-by-room styling walk with host</li>
+          <li>Throw pillow & layering masterclass (great room)</li>
+          <li>Luxury goodie bag on departure</li>
+          <li>Access to linen pop-up boutique</li>
+          <li>Property brochure & agent introduction</li>
+        </ul>
+        <p class="tier-note">The lightest touch entry. Perfect for serious buyers and curious dreamers alike.</p>
+      </div>
+
+      <div class="event-tier featured">
+        <div class="tier-tag premium">Tier Two — Most Popular</div>
+        <div class="tier-name">The Afternoon Masterclass</div>
+        <div class="tier-subtitle">Style, learn & shop</div>
+        <div class="tier-price">€345 <span>per person</span></div>
+        <div class="tier-time">1:00 — 5:00pm · Capacity: 14</div>
+        <div class="tier-divider"></div>
+        <ul class="tier-includes">
+          <li>All Tier One inclusions</li>
+          <li>Hands-on furniture arrangement workshop (two rooms)</li>
+          <li>Private bedroom styling session: layering, linens, pillows</li>
+          <li>Live demonstration: how to dress a bed like a 5-star hotel</li>
+          <li>Q&A with resident stylist</li>
+          <li>Exclusive discount code for linen orders placed on the day</li>
+          <li>Premium goodie bag (upgraded contents)</li>
+        </ul>
+        <p class="tier-note">The sweet spot. This is where the magic happens.</p>
+      </div>
+
+      <div class="event-tier">
+        <div class="tier-tag">Tier Three</div>
+        <div class="tier-name">The Dinner Experience</div>
+        <div class="tier-subtitle">A night in the château</div>
+        <div class="tier-price">€595 <span>per person</span></div>
+        <div class="tier-time">6:30 — 10:00pm · Capacity: 10</div>
+        <div class="tier-divider"></div>
+        <ul class="tier-includes">
+          <li>All Tier Two inclusions (separate afternoon session)</li>
+          <li>Private dining in the grand salle à manger</li>
+          <li>Table styling demonstration before the meal</li>
+          <li>Wine from local domaine with sommelier notes</li>
+          <li>Exclusive access to off-market property details</li>
+          <li>One-on-one time with listing agent post-dinner</li>
+          <li>Bespoke gift box: monogrammed linen napkins, candle, recipe card</li>
+        </ul>
+        <p class="tier-note">For serious buyers and those who want to fully inhabit the dream.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ROOMS ── -->
+<section class="rooms">
+  <div class="wrap">
+    <div class="sec-label">Room by room</div>
+    <h2 class="sec-title">Select <em>three rooms</em><br/>for the event.</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-body">Choose three signature spaces within the château — each one becomes a stage set, styled to its highest potential. Guests move through them as a journey, learning at each stop.</p>
+    <div class="rooms-grid">
+
+      <div class="room-card">
+        <div class="room-visual salon">🛋️</div>
+        <div class="room-body">
+          <div class="room-tagline">Stop One</div>
+          <div class="room-name">The Grand Salon</div>
+          <p class="room-desc">The emotional heart of the château. Style this room for maximum drama and warmth — the first impression that tells guests exactly what life here could feel like.</p>
+          <ul class="room-lessons">
+            <li>How to anchor a large room with a central rug</li>
+            <li>The rule of three for side table styling</li>
+            <li>Mixing antique and contemporary pieces without conflict</li>
+            <li>Layering lighting: ambient, task, accent</li>
+            <li>How to create intimacy in a grand-scale space</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-visual chamber">🛏️</div>
+        <div class="room-body">
+          <div class="room-tagline">Stop Two</div>
+          <div class="room-name">The Maître Chambre</div>
+          <p class="room-desc">The bedroom is where the linen experience lives. This is your showroom moment — a bed dressed to perfection, touchable textures, the layered pillow arrangement demonstrated live.</p>
+          <ul class="room-lessons">
+            <li>The 5-layer bed dressing formula (see Pillows section)</li>
+            <li>Thread count, percale vs sateen: what to feel for</li>
+            <li>How to choose a duvet weight for different seasons</li>
+            <li>Nightstand composition: lamp, books, one personal object</li>
+            <li>Window treatment options for stone-wall rooms</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-visual library">📚</div>
+        <div class="room-body">
+          <div class="room-tagline">Stop Three</div>
+          <div class="room-name">The Library or Study</div>
+          <p class="room-desc">A room of quiet purpose — the perfect place to end the tour. This space demonstrates how to create character, warmth, and intellectual atmosphere in a property room that buyers often underestimate.</p>
+          <ul class="room-lessons">
+            <li>How to style bookshelves: colour-blocking vs curated objects</li>
+            <li>Creating a reading corner: chair, lamp, side table</li>
+            <li>Using dark paint to make a small room feel intimate, not cramped</li>
+            <li>Desk styling for a home office that doesn't feel corporate</li>
+            <li>The role of scent: diffusers, candles, fresh flowers</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── GOODIE BAGS ── -->
+<section class="goodies">
+  <div class="wrap">
+    <div class="sec-label">Departure gift</div>
+    <h2 class="sec-title">The <em>goodie bag</em><br/>they talk about.</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-body">Every guest leaves with something beautiful in their hands. The gift bag is a conversation piece, a marketing tool, and a brand impression that travels home with them.</p>
+
+    <div class="goodie-intro">
+      <div class="goodie-tag">
+        <div class="goodie-tag-label">The philosophy</div>
+        <div class="goodie-tag-title">Things they'll keep, use, and remember you by.</div>
+        <div class="goodie-tag-sub">Each item in the bag is either a sample they can order from, a sensory memory of the day, or a piece of beautiful packaging that says: this event was worth the price.</div>
+      </div>
+
+      <div>
+        <div class="goodie-list-header">What goes in the bag</div>
+        <div class="goodie-items">
+          <div class="goodie-item">
+            <div class="goodie-icon">🧵</div>
+            <div>
+              <div class="goodie-item-name">Linen swatch card</div>
+              <div class="goodie-item-desc">A beautifully packaged set of 4 fabric swatches from the linen collection shown on the day — each labelled with thread count and colourway, with an order code printed on the reverse.</div>
+            </div>
+          </div>
+          <div class="goodie-item">
+            <div class="goodie-icon">🕯️</div>
+            <div>
+              <div class="goodie-item-name">Château candle</div>
+              <div class="goodie-item-desc">A small custom-label candle (local fragrance house) in a scent chosen for the château — lavender for Provence, cedar for Dordogne, etc. A sensory souvenir of the property itself.</div>
+            </div>
+          </div>
+          <div class="goodie-item">
+            <div class="goodie-icon">📖</div>
+            <div>
+              <div class="goodie-item-name">Styling lookbook</div>
+              <div class="goodie-item-desc">A 16-page printed booklet with photography from the event's styled rooms, key tips from the masterclass, and a QR code to book a private property viewing.</div>
+            </div>
+          </div>
+          <div class="goodie-item">
+            <div class="goodie-icon">🌸</div>
+            <div>
+              <div class="goodie-item-name">Dried botanical posy</div>
+              <div class="goodie-item-desc">A hand-tied mini bundle of dried lavender, eucalyptus or grasses tied with linen ribbon — beautiful to photograph, fragrant for weeks, zero waste.</div>
+            </div>
+          </div>
+          <div class="goodie-item">
+            <div class="goodie-icon">🍫</div>
+            <div>
+              <div class="goodie-item-name">Local artisan chocolate</div>
+              <div class="goodie-item-desc">Two or three pieces of fine local chocolate in branded paper — something delicious that reinforces the provenance and region of the château.</div>
+            </div>
+          </div>
+          <div class="goodie-item">
+            <div class="goodie-icon">🏰</div>
+            <div>
+              <div class="goodie-item-name">Château property card</div>
+              <div class="goodie-item-desc">A luxury heavyweight card with a beautiful photo of the property, key details, agent contact, and a personalised viewing URL — premium, giftable, not a flyer.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LINENS ── -->
+<section class="linens">
+  <div class="wrap">
+    <div class="sec-label">The linen experience</div>
+    <h2 class="sec-title">Touch it. <em>Order it.</em><br/>Take it home.</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-body">A curated linen pop-up operates during the event — sheets, duvet covers, and pillowcases displayed in the bedroom as they would truly live, available to order on the day with delivery to any address.</p>
+
+    <div class="linens-grid">
+
+      <div class="linen-card">
+        <div class="linen-swatch ivory"></div>
+        <div class="linen-body">
+          <div class="linen-name">Ivoire</div>
+          <div class="linen-thread">400TC · Percale</div>
+          <div class="linen-desc">Crisp, cool, endlessly elegant. The classic château white — the one you reach for every morning.</div>
+          <div class="linen-price">from €180</div>
+          <a class="linen-cta" href="#">Order on the day →</a>
+        </div>
+      </div>
+
+      <div class="linen-card">
+        <div class="linen-swatch champagne"></div>
+        <div class="linen-body">
+          <div class="linen-name">Champagne</div>
+          <div class="linen-thread">500TC · Sateen</div>
+          <div class="linen-desc">A warm honey tone in silky sateen weave — luxurious against the skin, beautiful against stone walls.</div>
+          <div class="linen-price">from €220</div>
+          <a class="linen-cta" href="#">Order on the day →</a>
+        </div>
+      </div>
+
+      <div class="linen-card">
+        <div class="linen-swatch moonstone"></div>
+        <div class="linen-body">
+          <div class="linen-name">Moonstone</div>
+          <div class="linen-thread">400TC · Percale</div>
+          <div class="linen-desc">A cool blue-grey that pairs beautifully with antique oak floors and aged stone — calm, serene, timeless.</div>
+          <div class="linen-price">from €195</div>
+          <a class="linen-cta" href="#">Order on the day →</a>
+        </div>
+      </div>
+
+      <div class="linen-card">
+        <div class="linen-swatch dusky"></div>
+        <div class="linen-body">
+          <div class="linen-name">Dusky Rose</div>
+          <div class="linen-thread">600TC · Sateen</div>
+          <div class="linen-desc">The most sensual colourway in the range. A blush with violet undertones — for bedrooms that deserve theatre.</div>
+          <div class="linen-price">from €265</div>
+          <a class="linen-cta" href="#">Order on the day →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FURNITURE ARRANGEMENT ── -->
+<section class="styling">
+  <div class="wrap">
+    <div class="sec-label">Masterclass content</div>
+    <h2 class="sec-title">The <em>furniture</em><br/>arrangement workshop.</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-body">Guests watch and participate as the stylist rearranges a room in real time — demonstrating principles that will change how they see every room they ever enter.</p>
+
+    <div class="styling-items">
+
+      <div class="styling-item">
+        <div class="styling-num">
+          <div class="styling-num-val">01</div>
+          <div class="styling-num-label">Principle</div>
+        </div>
+        <div class="styling-content">
+          <div class="styling-title">Conversation, not circulation</div>
+          <p class="styling-desc">The biggest mistake in large rooms: furniture pushed against walls. Demonstrate how pulling pieces toward the centre creates intimacy and purpose — two sofas facing each other with a coffee table between them transforms a corridor into a destination.</p>
+          <div class="styling-tips">
+            <span class="tip-pill">Leave 45cm walkways</span>
+            <span class="tip-pill">Face seating inward</span>
+            <span class="tip-pill">Anchor with a rug</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="styling-item">
+        <div class="styling-num">
+          <div class="styling-num-val">02</div>
+          <div class="styling-num-label">Principle</div>
+        </div>
+        <div class="styling-content">
+          <div class="styling-title">The room has a focal point — find it</div>
+          <p class="styling-desc">Every room has one dominant feature: a fireplace, a window with a view, a statement artwork. All furniture should orient toward it. Show guests how identifying the focal point first makes every other decision easier and more intentional.</p>
+          <div class="styling-tips">
+            <span class="tip-pill">Fireplace always wins</span>
+            <span class="tip-pill">Align sofa axis</span>
+            <span class="tip-pill">Frame the view</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="styling-item">
+        <div class="styling-num">
+          <div class="styling-num-val">03</div>
+          <div class="styling-num-label">Principle</div>
+        </div>
+        <div class="styling-content">
+          <div class="styling-title">Scale and proportion: the château rule</div>
+          <p class="styling-desc">Château rooms have high ceilings and generous proportions. Contemporary furniture often looks lost in them. Show how to use tall bookcases, substantial sofas, oversized art, and statement lighting to fill vertical space and honour the architecture.</p>
+          <div class="styling-tips">
+            <span class="tip-pill">Go tall, not wide</span>
+            <span class="tip-pill">Oversized art ≠ clutter</span>
+            <span class="tip-pill">Mix scales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="styling-item">
+        <div class="styling-num">
+          <div class="styling-num-val">04</div>
+          <div class="styling-num-label">Principle</div>
+        </div>
+        <div class="styling-content">
+          <div class="styling-title">Old and new: the key to character</div>
+          <p class="styling-desc">Pure antique rooms feel like museums. Pure contemporary rooms feel cold. The magic is in the mix: a 19th-century armoire beside a clean-lined modern sofa, a Louis XV chair reupholstered in contemporary linen. Demonstrate three specific pairings using pieces in the room.</p>
+          <div class="styling-tips">
+            <span class="tip-pill">One antique per vignette</span>
+            <span class="tip-pill">Update with fabric</span>
+            <span class="tip-pill">Same wood tone family</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PILLOWS ── -->
+<section class="pillows">
+  <div class="wrap">
+    <div class="sec-label">The bed dressing masterclass</div>
+    <h2 class="sec-title">The throw pillow<br/><em>formula.</em></h2>
+    <div class="sec-rule"></div>
+    <p class="sec-body">This is the moment every guest photographs for Instagram. The bed demonstration makes abstract styling concepts tangible, shoppable, and instantly replicable at home.</p>
+
+    <div class="pillow-formula">
+      <div class="pillow-formula-label">The five-layer method</div>
+      <div class="pillow-formula-title">How to dress a bed like a château hotel.</div>
+
+      <div class="pillow-steps">
+        <div class="pillow-step">
+          <div class="pillow-step-num">01</div>
+          <div class="pillow-step-name">The Base Sheet</div>
+          <div class="pillow-step-desc">Crisp fitted sheet, pulled taut. The foundation everything else rests on — no wrinkles allowed.</div>
+        </div>
+        <div class="pillow-step">
+          <div class="pillow-step-num">02</div>
+          <div class="pillow-step-name">The Duvet</div>
+          <div class="pillow-step-desc">Placed high on the bed. Fold the top 30cm down neatly to reveal the top sheet beneath.</div>
+        </div>
+        <div class="pillow-step">
+          <div class="pillow-step-num">03</div>
+          <div class="pillow-step-name">Sleeping Pillows</div>
+          <div class="pillow-step-desc">Two per person in matching cases. Stacked or standing upright — both work, choose one and commit.</div>
+        </div>
+        <div class="pillow-step">
+          <div class="pillow-step-num">04</div>
+          <div class="pillow-step-name">Euro Squares</div>
+          <div class="pillow-step-desc">65x65cm pillows in linen or textured cases, leaned against the headboard or wall. These add height and intention.</div>
+        </div>
+      </div>
+
+      <div class="pillow-extras">
+        <div class="pillow-extra">
+          <div class="pillow-extra-title">Step 05 — The Throw Pillows</div>
+          <div class="pillow-extra-body">2–3 decorative pillows placed at the front. The rule: one pattern, one solid, one texture. Different sizes. All within the same colour family but not matching. The accent colour of the room should appear here at least once. Stack a small square in front for depth — never a row of identicals.</div>
+        </div>
+        <div class="pillow-extra">
+          <div class="pillow-extra-title">The Finishing Touch — The Throw</div>
+          <div class="pillow-extra-body">A linen or cashmere throw, draped casually across the foot of the bed (not folded perfectly — that reads as corporate hotel). Pull it to one side for asymmetry. This is the element that says: someone lives here and loves it. Available to order from the linen boutique on the day.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── LOGISTICS ── -->
+<section class="logistics">
+  <div class="wrap">
+    <div class="sec-label">Making it happen</div>
+    <h2 class="sec-title">The <em>logistics</em><br/>and team.</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-body">A seamless event requires a small but precise team and pre-event preparation. This is what you need on the ground.</p>
+
+    <div class="logistics-grid">
+
+      <div class="logistics-card">
+        <div class="logistics-icon">👤</div>
+        <div class="logistics-name">The Team</div>
+        <ul class="logistics-list">
+          <li>1 × Lead stylist / host (ideally with social following)</li>
+          <li>1 × Linen & product specialist at the boutique pop-up</li>
+          <li>1 × Property agent (present but not pushy — social, not selling)</li>
+          <li>1 × Catering lead (can be local catering company)</li>
+          <li>1 × Photographer for content and guest portraits</li>
+          <li>1 × Front-of-house / welcome host</li>
+        </ul>
+      </div>
+
+      <div class="logistics-card">
+        <div class="logistics-icon">📋</div>
+        <div class="logistics-name">Pre-Event Setup</div>
+        <ul class="logistics-list">
+          <li>Style all three rooms 48 hrs before (allow full day)</li>
+          <li>Set linen boutique pop-up in entrance hall or orangerie</li>
+          <li>Prepare and label all goodie bags in advance</li>
+          <li>Print order forms, lookbooks, and property cards</li>
+          <li>Brief agent on soft-touch approach — no hard selling</li>
+          <li>Test all QR codes and booking links</li>
+          <li>Fresh flowers arranged morning of event</li>
+        </ul>
+      </div>
+
+      <div class="logistics-card">
+        <div class="logistics-icon">📢</div>
+        <div class="logistics-name">Marketing & Promotion</div>
+        <ul class="logistics-list">
+          <li>Ticket platform: Humanitix or Eventbrite with waitlist option</li>
+          <li>Instagram teaser campaign: 3 weeks out, room reveal content</li>
+          <li>Email to existing buyer/client database</li>
+          <li>Targeted Facebook ads: women 45–65, France/expat buyers</li>
+          <li>Local press: regional lifestyle and property publications</li>
+          <li>Post-event: guest content reshared within 24 hours</li>
+          <li>Waitlist offer: next event early access for those who missed out</li>
+        </ul>
+      </div>
+
+      <div class="logistics-card">
+        <div class="logistics-icon">🤝</div>
+        <div class="logistics-name">Brand Partners to Approach</div>
+        <ul class="logistics-list">
+          <li>Local linen maker or premium bed brand (anchor partner)</li>
+          <li>Regional champagne house or wine domaine</li>
+          <li>Artisan candle or fragrance house</li>
+          <li>Local florist (in-kind for event florals + content)</li>
+          <li>Fine food or chocolate producer for goodie bags</li>
+          <li>Luxury travel company for guest giveaway</li>
+        </ul>
+      </div>
+
+      <div class="logistics-card">
+        <div class="logistics-icon">📱</div>
+        <div class="logistics-name">Content Strategy</div>
+        <ul class="logistics-list">
+          <li>Hire photographer: styled room shots before guests arrive</li>
+          <li>Video reel: arrive, style, dine — 60 second edit</li>
+          <li>Goodie bag flat lay: always goes viral in this market</li>
+          <li>Before/after room arrangement (strongest teaching content)</li>
+          <li>Guest portraits: offer styled photo at the bed or salon</li>
+          <li>Stories on the day from host's personal account</li>
+        </ul>
+      </div>
+
+      <div class="logistics-card">
+        <div class="logistics-icon">⚠️</div>
+        <div class="logistics-name">Non-Negotiables</div>
+        <ul class="logistics-list">
+          <li>Private rooms only — no shared sleeping areas shown</li>
+          <li>Property agent briefed: let the experience sell, not words</li>
+          <li>Goodie bags identical regardless of tier — no second-class guests</li>
+          <li>Candles and fragrance consistent throughout the property</li>
+          <li>Beautiful music at low volume in every room</li>
+          <li>Booking: strict capacity per tier, no exceptions — scarcity matters</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── REVENUE ── -->
+<section class="revenue">
+  <div class="wrap">
+    <div class="sec-label">The numbers</div>
+    <h2 class="sec-title">Revenue <em>model.</em></h2>
+    <div class="sec-rule"></div>
+    <p class="sec-body">One two-day event. Three tiers per day. Multiple revenue streams. This is a conservative model — the property sale is not included.</p>
+
+    <div class="revenue-table">
+      <div class="rev-row header">
+        <div class="rev-cell">Revenue stream</div>
+        <div class="rev-cell">Qty</div>
+        <div class="rev-cell">Unit</div>
+        <div class="rev-cell">Total</div>
+      </div>
+      <div class="rev-row">
+        <div class="rev-cell">Tier 1 tickets — The Morning Welcome (×2 days)</div>
+        <div class="rev-cell">40</div>
+        <div class="rev-cell">€195</div>
+        <div class="rev-cell">€7,800</div>
+      </div>
+      <div class="rev-row">
+        <div class="rev-cell">Tier 2 tickets — The Afternoon Masterclass (×2 days)</div>
+        <div class="rev-cell">28</div>
+        <div class="rev-cell">€345</div>
+        <div class="rev-cell">€9,660</div>
+      </div>
+      <div class="rev-row">
+        <div class="rev-cell">Tier 3 tickets — The Dinner Experience (×2 nights)</div>
+        <div class="rev-cell">20</div>
+        <div class="rev-cell">€595</div>
+        <div class="rev-cell">€11,900</div>
+      </div>
+      <div class="rev-row">
+        <div class="rev-cell">Linen & product sales on the day (est. 30% of guests)</div>
+        <div class="rev-cell">26</div>
+        <div class="rev-cell">€320 avg</div>
+        <div class="rev-cell">€8,320</div>
+      </div>
+      <div class="rev-row">
+        <div class="rev-cell">Brand partnership / sponsorship contribution</div>
+        <div class="rev-cell">2</div>
+        <div class="rev-cell">€2,500</div>
+        <div class="rev-cell">€5,000</div>
+      </div>
+      <div class="rev-row total">
+        <div class="rev-cell">Gross event revenue</div>
+        <div class="rev-cell"></div>
+        <div class="rev-cell"></div>
+        <div class="rev-cell">€42,680</div>
+      </div>
+    </div>
+
+    <p class="rev-note">Estimated event costs (catering, florals, team, print, goodie bags): €12,000–€16,000 · Net margin: approx. €26–30k before property sale commission. This model works independently of whether the château sells on the day.</p>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta-wrap">
+      <div class="cta-ornament">— The next step —</div>
+      <h2 class="cta-title">Ready to bring a château to life?</h2>
+      <p class="cta-body">This strategy document is the beginning. The next step is selecting your château, identifying your linen and brand partners, and opening tickets. Every element above can be adapted to the property's region, the seller's timeline, and your specific audience.</p>
+      <div class="btn-group">
+        <button class="btn-primary no-print" onclick="window.print()">🖨️ &nbsp; Save as PDF</button>
+        <button class="btn-secondary no-print" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ &nbsp; Back to top</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-gold">Château Living</div>
+  <p>Pop-Up Event Strategy · 2025–2026 · Confidential working document</p>
+</footer>
+
+</body>
+</html>
